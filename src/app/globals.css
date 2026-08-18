@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SAMATECHS design tokens
+   Source of truth: docs/SAMATECHS_BRAND_GUIDELINES_WEB.md
+   ========================================================================== */
+
+:root {
+  /* Primary blues */
+  --color-sovereign: #005bc2;
+  --color-pulse: #0078ff;
+  --color-intelligence: #3393ff;
+
+  /* Deep neutrals */
+  --color-navy: #121a23;
+  --color-slate-navy: #212d3a;
+  --color-steel: #425367;
+
+  /* Light neutrals */
+  --color-white: #ffffff;
+  --color-ice: #e9f0f9;
+  --color-mist: #bdd4ee;
+
+  /* Secondary — used only where semantically justified */
+  --color-gold: #d6a24b;
+  --color-gold-soft: #e3bf82;
+  --color-gold-pale: #f1dfc1;
+  --color-teal: #1f9e8c;
+  --color-teal-digital: #2ad5bd;
+  --color-teal-pale: #7fe6d7;
+
+  /* Functional */
+  --color-success: #3fa66e;
+  --color-amber: #e3a63a;
+  --color-critical: #e85c4a;
+
+  /* Clay — light surface */
+  --clay-light: #e9f0f9;
+  --clay-light-edge: #bdd4ee;
+  --clay-light-highlight: rgba(255, 255, 255, 0.72);
+  --clay-light-shadow: rgba(66, 83, 103, 0.2);
+
+  /* Clay — blue surface */
+  --clay-blue: #0078ff;
+  --clay-blue-deep: #005bc2;
+  --clay-blue-highlight: rgba(255, 255, 255, 0.22);
+  --clay-blue-shadow: rgba(18, 26, 35, 0.3);
+
+  /* Clay — dark surface */
+  --clay-dark: #121a23;
+  --clay-dark-elevated: #212d3a;
+  --clay-dark-highlight: rgba(255, 255, 255, 0.08);
+  --clay-dark-shadow: rgba(0, 0, 0, 0.38);
+
+  /* Page-level */
+  --background: var(--color-white);
+  --foreground: var(--color-navy);
+
+  /* Grid */
+  --content-max: 1520px;
+  --gutter: clamp(20px, 5vw, 96px);
+  --col-gap: 28px;
+
+  /* Motion */
+  --ease-clay: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 200ms;
+  --dur-surface: 300ms;
+  --dur-reveal: 900ms;
+}
+
+@theme inline {
+  --color-sovereign: var(--color-sovereign);
+  --color-pulse: var(--color-pulse);
+  --color-intelligence: var(--color-intelligence);
+  --color-navy: var(--color-navy);
+  --color-slate-navy: var(--color-slate-navy);
+  --color-steel: var(--color-steel);
+  --color-white: var(--color-white);
+  --color-ice: var(--color-ice);
+  --color-mist: var(--color-mist);
+  --color-gold: var(--color-gold);
+  --color-gold-soft: var(--color-gold-soft);
+  --color-gold-pale: var(--color-gold-pale);
+  --color-teal: var(--color-teal);
+  --color-teal-digital: var(--color-teal-digital);
+  --color-teal-pale: var(--color-teal-pale);
+  --color-success: var(--color-success);
+  --color-amber: var(--color-amber);
+  --color-critical: var(--color-critical);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-quicksand), "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-plex-arabic), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 22.5rem;
+}
+
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+
+.container-samatechs {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+
+/* ==========================================================================
+   Clay surfaces
+   "precision-molded strategic instruments" — restrained two-part depth:
+   an external lift shadow + a thin internal highlight. No glass blur.
+   ========================================================================== */
+
+.clay-light {
+  background: linear-gradient(160deg, #ffffff 0%, var(--clay-light) 62%);
+  border: 1px solid var(--clay-light-edge);
+  box-shadow:
+    0 1px 0 0 var(--clay-light-highlight) inset,
+    0 -1px 0 0 rgba(66, 83, 103, 0.08) inset,
+    0 18px 40px -22px var(--clay-light-shadow),
+    0 2px 6px -2px var(--clay-light-shadow);
+}
+
+.clay-blue {
+  background: linear-gradient(160deg, var(--clay-blue) 0%, var(--clay-blue-deep) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 1px 0 0 var(--clay-blue-highlight) inset,
+    0 -10px 20px -12px rgba(0, 0, 0, 0.25) inset,
+    0 18px 40px -18px var(--clay-blue-shadow),
+    0 2px 8px -2px var(--clay-blue-shadow);
+}
+
+.clay-dark {
+  background: linear-gradient(160deg, var(--clay-dark-elevated) 0%, var(--clay-dark) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 1px 0 0 var(--clay-dark-highlight) inset,
+    0 20px 44px -22px var(--clay-dark-shadow),
+    0 2px 8px -2px var(--clay-dark-shadow);
+}
+
+.clay-press {
+  transition:
+    transform var(--dur-hover) var(--ease-clay),
+    box-shadow var(--dur-hover) var(--ease-clay);
+}
+
+.clay-press:hover {
+  transform: translateY(-2px);
+}
+
+.clay-press:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* ==========================================================================
+   Focus
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-pulse);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.clay-dark :focus-visible,
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--color-intelligence);
+}
+
+/* ==========================================================================
+   Utility text treatments
+   ========================================================================== */
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-navy);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 10px 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* ==========================================================================
+   Strategic Intelligence Field — signature element
+   ========================================================================== */
+
+.field-channel {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: field-draw var(--dur-reveal) var(--ease-clay) forwards;
+  animation-delay: var(--field-delay, 0ms);
+}
+
+.field-origin,
+.field-node {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+  animation: field-node-in 560ms var(--ease-clay) forwards;
+  animation-delay: var(--field-delay, 0ms);
+}
+
+@keyframes field-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes field-node-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.channel-shadow {
+  fill: none;
+  stroke: rgba(18, 26, 35, 0.32);
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  transform: translateY(2.5px);
+}
+
+.channel-body {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.channel-highlight {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  transform: translateY(-1.6px);
+}
+
+.field-layer {
+  transform: translate3d(
+    calc(var(--field-px, 0px) * var(--field-depth, 0)),
+    calc(var(--field-py, 0px) * var(--field-depth, 0)),
+    0
+  );
+  transition: transform 240ms var(--ease-clay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-layer {
+    transform: none !important;
+    transition: none !important;
+  }
+}
